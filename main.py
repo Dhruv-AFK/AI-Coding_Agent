@@ -1,18 +1,30 @@
 import os
+import sys
 from dotenv import load_dotenv
 from google import genai
 
-load_dotenv()
-api_key = os.environ.get("GEMINI_API_KEY")
+def main():
 
-client = genai.Client(api_key=api_key)
+    load_dotenv()
+    api_key = os.environ.get("GEMINI_API_KEY")
 
-response = client.models.generate_content(
-    model='gemini-2.5-flash', contents="""
-    Why are Boot.dev and FreeCodeCamp such great places to learn backend development? 
-    Use one paragraph maximum.
-    """,
-)
-print(response.text)
-print(f"Prompt tokens : {response.usage_metadata.prompt_tokens_count}")
-print(f"Response tokens : {response.usage_metadata.candidates_tokens_count}")
+    client = genai.Client(api_key=api_key)
+
+    print("Args", sys.argv)
+
+    response = client.models.generate_content(
+        model='gemini-2.5-flash', 
+        contents="""
+        Why are Boot.dev and FreeCodeCamp such great places to learn backend development? 
+        Use one paragraph maximum.
+        """,
+    )
+
+    print(response.text)
+    if response is None or response.usage_metadata is None:
+        print ("response is malformed")
+        return
+    print(f"Prompt tokens : {response.usage_metadata.prompt_token_count}")
+    print(f"Response tokens : {response.usage_metadata.candidates_token_count}")
+
+main()
