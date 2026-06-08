@@ -10,14 +10,16 @@ def main():
 
     client = genai.Client(api_key=api_key)
 
-    print("Args", sys.argv)
+
+    if len(sys.argv) > 2:
+        print("I need a prompt!")
+        sys.exit(1)
+        
+    prompt = sys.argv[1]
 
     response = client.models.generate_content(
         model='gemini-2.5-flash', 
-        contents="""
-        Why are Boot.dev and FreeCodeCamp such great places to learn backend development? 
-        Use one paragraph maximum.
-        """,
+        contents=prompt,
     )
 
     print(response.text)
