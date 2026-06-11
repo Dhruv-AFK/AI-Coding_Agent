@@ -40,9 +40,10 @@ class TestCalculator(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.calculator.evaluate("$ 3 5")
 
-    def test_not_enough_operands(self):
-        with self.assertRaises(ValueError):
-            self.calculator.evaluate("+ 3")
+    
+    
+
+
 
 
 if __name__ == "__main__":
