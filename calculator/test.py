@@ -41,9 +41,6 @@ class TestCalculator(unittest.TestCase):
             self.calculator.evaluate("$ 3 5")
 
     
-    
-
-
 
 
 if __name__ == "__main__":
